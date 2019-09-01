@@ -1,69 +1,83 @@
 <!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <title>ANCORA</title>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-       
-        <link href="https://fonts.googleapis.com/css?family=Gayathri&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <main>
-            <div class="text-center project-wrapper">
-                <div id="passionate">
-                    <h1>Donation</h1>
-                    <p>Your little contribution goes a long way</p>
-                </div>
-                <div class="flex-container">
-                    <div class="flex-item">
-                       <form>
-    <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-    <button type="button" onClick="payWithRave()">Donate Now</button>
-</form>
+<html>
 
-<script>
-    const API_publicKey = "FLWPUBK-0896ab2ac4a8dd4908b5344eab109bd2-X";
+<head>
+    <title>Contact Form Test</title>
+    <style>
+        /* Style inputs with type="text", select elements and textareas */
 
-    function payWithRave() {
-        var x = getpaidSetup({
-            PBFPubKey: API_publicKey,
-            customer_email: "user@example.com",
-            amount: 2000,
-            customer_phone: "234099940409",
-            currency: "NGN",
-            txref: "rave-123456",
-            meta: [{
-                metaname: "flightID",
-                metavalue: "AP1234"
-            }],
-            onclose: function() {},
-            callback: function(response) {
-                var txref = response.tx.txRef; // collect txRef returned and pass to a 					server page to complete status check.
-                console.log("This is the response returned after a charge", response);
-                if (
-                    response.tx.chargeResponseCode == "00" ||
-                    response.tx.chargeResponseCode == "0"
-                ) {
-                    // redirect to a success page
-                } else {
-                    // redirect to a failure page.
-                }
+        input[type=text],
+        select,
+        textarea {
+            width: 100%;
+            /* Full width */
+            padding: 12px;
+            /* Some padding */
+            border: 1px solid #ccc;
+            /* Gray border */
+            border-radius: 4px;
+            /* Rounded borders */
+            box-sizing: border-box;
+            /* Make sure that padding and width stays in place */
+            margin-top: 6px;
+            /* Add a top margin */
+            margin-bottom: 16px;
+            /* Bottom margin */
+            resize: vertical
+            /* Allow the user to vertically resize the textarea (not horizontally) */
+        }
+        /* Style the submit button with a specific background color etc */
 
-                x.close(); // use this to close the modal immediately after payment.
-            }
-        });
-    }
-</script>
-                    </div>
-                    <div >
-                        <a href="">
-                            <div class="">
-                                <img src="data:image/png;base64,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">
-                               
-                        </a>
-                    </div>
-                    
-                </div>
-            </div>
-        </main>
-    </body>
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        /* When moving the mouse over the submit button, add a darker green color */
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        /* Add a background color and some padding around the form */
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <form action="form.php" method="post">
+
+            <label for="firstname">First Name</label>
+            <input type="text" name="firstname" placeholder="Your name..">
+
+            <label for="lastname">Last Name</label>
+            <input type="text"  name="lastname" placeholder="Your last name..">
+
+            <label for="Email">Email</label>
+            <input type="text"  name="email" placeholder="Your Email ">
+
+            <label for="Phone Number">Phone Number</label>
+            <input type="text"  name="phone" placeholder="Your Phone Number ">
+
+
+            <label for="subject">Subject</label>
+            <textarea  name="message" placeholder="Write something.." style="height:200px"></textarea>
+
+            <input type="submit" value="Submit" name="submit">
+
+        </form>
+        
+    </div>
+</body>
+
 </html>
